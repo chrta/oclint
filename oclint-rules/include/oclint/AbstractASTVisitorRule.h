@@ -27,7 +27,7 @@ protected:
         {
             clang::SourceLocation startLocation = (*it)->getLocStart();
             if (startLocation.isValid() &&
-                sourceManager->getMainFileID() == sourceManager->getFileID(startLocation))
+		!sourceManager->isInSystemHeader(startLocation))
             {
                 (void) /* explicitly ignore the return of this function */
                     clang::RecursiveASTVisitor<T>::TraverseDecl(*it);
